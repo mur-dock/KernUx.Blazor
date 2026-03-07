@@ -39,6 +39,29 @@ main {
     flex-wrap: wrap;
 }
 
+.top-row__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.theme-toggle-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.theme-toggle {
+    min-width: 8rem;
+}
+
+.theme-toggle__status {
+    margin: 0;
+}
+
 .content {
     flex: 1;
     padding: 1.5rem;
@@ -49,6 +72,13 @@ main {
 .content ::deep h3,
 .content ::deep p {
     max-width: 72ch;
+}
+
+@media (max-width: 640px) {
+    .top-row__actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
 }
 
 @media (min-width: 900px) {

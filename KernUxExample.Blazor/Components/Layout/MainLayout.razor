@@ -1,6 +1,9 @@
 ﻿@inherits LayoutComponentBase
+@inject ThemeService ThemeService
+@inject IJSRuntime Js
+@implements IDisposable
 
-<div class="page">
+<div class="page" data-kern-theme="@ThemeService.AttributeValue">
     <aside class="sidebar">
         <NavMenu/>
     </aside>
@@ -13,7 +16,26 @@
                     <h1 class="kern-title">KernUxExample.Blazor</h1>
                 </div>
 
-                <a class="kern-link" href="https://learn.microsoft.com/aspnet/core/" target="_blank" rel="noreferrer">About</a>
+                <div class="top-row__actions">
+                    <div class="theme-toggle-group">
+                        <p class="kern-body kern-body--small kern-body--muted" aria-live="polite">
+                            @(ThemeService.Current == KernTheme.Dark ? "Dark aktiv" : "Light aktiv")
+                        </p>
+                        <button type="button"
+                                class="kern-btn kern-btn--secondary"
+                                aria-pressed="@(ThemeService.Current == KernTheme.Dark ? "true" : "false")"
+                                title="@(ThemeService.Current == KernTheme.Dark ? "Zum hellen Theme wechseln" : "Zum dunklen Theme wechseln")"
+                                @onclick="ToggleTheme">
+                            <span class="kern-icon @(ThemeService.Current == KernTheme.Dark ? "kern-icon--light-mode" : "kern-icon--dark-mode")"
+                                  aria-hidden="true"></span>
+                            <span class="kern-label">
+                                @(ThemeService.Current == KernTheme.Dark ? "Light" : "Dark")
+                            </span>
+                        </button>
+                    </div>
+
+                    <a class="kern-link" href="https://learn.microsoft.com/aspnet/core/" target="_blank" rel="noreferrer">About</a>
+                </div>
             </div>
         </header>
 
@@ -28,3 +50,34 @@
     <a href="." class="reload">Reload</a>
     <span class="dismiss">🗙</span>
 </div>
+
+@code {
+    [CascadingParameter]
+    private HttpContext? HttpContext { get; set; }
+
+    protected override void OnInitialized()
+    {
+        // HttpContext ist nur beim SSR-Prerender befüllt.
+        // Nach der Hydration (InteractiveServer) ist er null – dann hat der
+        // ThemeService den Wert bereits aus dem Prerender-Durchlauf.
+        var stored = HttpContext?.Request.Cookies["kern-theme"];
+        ThemeService.Initialize(stored);
+
+        ThemeService.ThemeChanged += OnThemeChanged;
+    }
+
+    private async Task ToggleTheme()
+    {
+        ThemeService.Toggle();
+
+        // Cookie via document.cookie setzen – nach der Hydration ist HttpContext null.
+        // Das ist der einzige verbleibende JS-Interop-Aufruf in der gesamten App.
+        var cookieValue = $"kern-theme={ThemeService.AttributeValue}; path=/; max-age={365 * 24 * 3600}; samesite=lax";
+        await Js.InvokeVoidAsync("eval", $"document.cookie='{cookieValue}'");
+    }
+
+    private void OnThemeChanged(KernTheme _) => InvokeAsync(StateHasChanged);
+
+    public void Dispose() => ThemeService.ThemeChanged -= OnThemeChanged;
+}
+
