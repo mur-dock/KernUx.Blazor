@@ -37,4 +37,43 @@ public sealed class KernThemeProviderTests
         Assert.Equal(KernTheme.Dark, themeService.Current);
         Assert.Contains("Inhalt", cut.Markup);
     }
+
+    [Fact(DisplayName = "ThemeProvider setzt Light-Theme als Standard")]
+    public void KernThemeProvider_SetztLightAlsStandard()
+    {
+        // Given
+        using var context = new BunitContext();
+        context.Services.AddKernUx();
+
+        // When – kein Theme-Parameter → Default ist Light
+        var cut = context.Render<KernThemeProvider>(parameters => parameters
+            .AddChildContent("<p>Inhalt</p>"));
+
+        // Then
+        Assert.Equal("light", cut.Find("div").GetAttribute("data-kern-theme"));
+    }
+
+    [Fact(DisplayName = "ThemeProvider aktualisiert data-kern-theme nach Toggle über ThemeService")]
+    public void KernThemeProvider_ReagiertAufThemeWechsel()
+    {
+        // Given – Provider startet mit Light (Standard)
+        using var context = new BunitContext();
+        context.Services.AddKernUx();
+
+        var cut = context.Render<KernThemeProvider>(parameters => parameters
+            .AddChildContent("<p>Inhalt</p>"));
+
+        Assert.Equal("light", cut.Find("div").GetAttribute("data-kern-theme"));
+
+        // When – ThemeService.Toggle() wechselt intern auf Dark und feuert ThemeChanged.
+        // KernThemeProvider abonniert ThemeChanged in OnInitialized und ruft
+        // InvokeAsync(StateHasChanged) auf, was ein Re-Render auslöst.
+        // Dank _lastThemeParameter-Tracking in OnParametersSet wird der Service-Zustand
+        // bei diesem Re-Render nicht auf den (unveränderten) Parameter zurückgesetzt.
+        var themeService = context.Services.GetRequiredService<ThemeService>();
+        themeService.Toggle();
+
+        // Then – data-kern-theme muss nun "dark" sein
+        Assert.Equal("dark", cut.Find("div").GetAttribute("data-kern-theme"));
+    }
 }

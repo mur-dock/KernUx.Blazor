@@ -79,5 +79,38 @@ public sealed class FeedbackComponentsTests
         Assert.Equal("100", progress.GetAttribute("value"));
         Assert.Equal("100", progress.GetAttribute("max"));
     }
+
+    [Fact(DisplayName = "Alert setzt role='alert' für Live-Region-Barrierefreiheit")]
+    public void KernAlert_Setzt_Role_Alert()
+    {
+        // Given – role="alert" ist eine ARIA-Live-Region: Screenreader lesen den Inhalt
+        // automatisch vor, wenn er ins DOM eingefügt wird (WCAG 4.1.3).
+        using var context = new BunitContext();
+
+        // When
+        var cut = context.Render<KernAlert>(parameters => parameters
+            .Add(p => p.Type, AlertType.Danger)
+            .Add(p => p.Title, "Fehler"));
+
+        // Then – das äußere div muss role="alert" tragen.
+        var alert = cut.Find("div.kern-alert");
+        Assert.Equal("alert", alert.GetAttribute("role"));
+    }
+
+    [Fact(DisplayName = "Loader rendert ScreenreaderText als kern-sr-only")]
+    public void KernLoader_RendertScreenreaderText()
+    {
+        // Given – der Ladeindikator muss für Screenreader einen lesbaren Text liefern.
+        using var context = new BunitContext();
+
+        // When
+        var cut = context.Render<KernLoader>(parameters => parameters
+            .Add(p => p.Visible, true)
+            .Add(p => p.ScreenReaderText, "Wird geladen..."));
+
+        // Then – kern-sr-only macht Text visuell unsichtbar, aber für AT (Assistive Technology) lesbar.
+        Assert.Contains("kern-sr-only", cut.Markup);
+        Assert.Contains("Wird geladen...", cut.Markup);
+    }
 }
 

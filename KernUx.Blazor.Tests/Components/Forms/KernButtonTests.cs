@@ -45,5 +45,53 @@ public sealed class KernButtonTests
         // Then
         Assert.True(clicked);
     }
+
+    [Fact(DisplayName = "Deaktivierter Button trägt das disabled-Attribut")]
+    public void KernButton_DisabledTraegtAttribut()
+    {
+        // Given
+        using var context = new BunitContext();
+
+        // When
+        var cut = context.Render<KernButton>(parameters => parameters
+            .Add(p => p.Disabled, true)
+            .AddChildContent("Gesperrt"));
+
+        // Then – das HTML-disabled-Attribut verhindert Browser-Interaktion und Assistive-Technology-Aktivierung.
+        var button = cut.Find("button");
+        Assert.NotNull(button.GetAttribute("disabled"));
+    }
+
+    [Fact(DisplayName = "Icon-Only-Button rendert Label als kern-sr-only")]
+    public void KernButton_IconOnly_RendertScreenreaderLabel()
+    {
+        // Given – ein reiner Icon-Button muss für Screenreader trotzdem einen Text liefern.
+        using var context = new BunitContext();
+
+        // When
+        var cut = context.Render<KernButton>(parameters => parameters
+            .Add(p => p.IconOnly, true)
+            .Add(p => p.Icon, KernIconGlyph.Close)
+            .AddChildContent("Schließen"));
+
+        // Then – kern-sr-only macht den Text sichtbar nur für Screenreader (WCAG 1.1.1).
+        Assert.Contains("kern-sr-only", cut.Markup);
+        Assert.Contains("Schließen", cut.Markup);
+    }
+
+    [Fact(DisplayName = "Button rendert type-Attribut korrekt")]
+    public void KernButton_RendertTypeAttribut()
+    {
+        // Given
+        using var context = new BunitContext();
+
+        // When
+        var cut = context.Render<KernButton>(parameters => parameters
+            .Add(p => p.Type, "submit")
+            .AddChildContent("Absenden"));
+
+        // Then – type="submit" ist semantisch wichtig für Formulare.
+        Assert.Equal("submit", cut.Find("button").GetAttribute("type"));
+    }
 }
 

@@ -50,5 +50,22 @@ public sealed class KernDialogTests
         // Then
         Assert.True(closed);
     }
+
+    [Fact(DisplayName = "Dialog rendert Footer nur wenn FooterContent gesetzt ist")]
+    public void KernDialog_RendertFooterNurWennGesetzt()
+    {
+        // Given – der Footer ist optional; er darf nicht gerendert werden wenn er null ist.
+        using var context = new BunitContext();
+        context.JSInterop.SetupVoid("kernDialog.showModal", _ => true);
+        context.JSInterop.SetupVoid("kernDialog.close", _ => true);
+
+        // When – kein FooterContent übergeben
+        var cut = context.Render<KernDialog>(parameters => parameters
+            .Add(p => p.Title, "Ohne Footer")
+            .Add(p => p.Open, false));
+
+        // Then – <footer> darf nicht im Markup erscheinen.
+        Assert.Empty(cut.FindAll("footer.kern-dialog__footer"));
+    }
 }
 
