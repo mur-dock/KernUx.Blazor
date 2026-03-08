@@ -56,10 +56,10 @@
                            Error="@GetValidationError(nameof(_geburtstagTag))" />
 
             <KernRow>
-                <KernCol Span="6">
+                <KernCol Span="12" SpanMd="6">
                     <KernButton Variant="ButtonVariant.Secondary" OnClick="CancelAntrag" Block="true">Abbrechen</KernButton>
                 </KernCol>
-                <KernCol Span="6">
+                <KernCol Span="12" SpanMd="6">
                     <KernButton Variant="ButtonVariant.Primary" OnClick="NextStep" Block="true">Weiter</KernButton>
                 </KernCol>
             </KernRow>
@@ -74,19 +74,19 @@
                            Error="@GetValidationError(nameof(_strasse))" />
 
             <KernRow>
-                <KernCol Span="4">
+                <KernCol Span="12" SpanMd="4">
                     <KernInputText Label="Hausnummer"
                                    Value="@_hausnummer"
                                    ValueChanged="@(value => _hausnummer = value)"
                                    Error="@GetValidationError(nameof(_hausnummer))" />
                 </KernCol>
-                <KernCol Span="4">
+                <KernCol Span="12" SpanMd="4">
                     <KernInputText Label="PLZ"
                                    Value="@_plz"
                                    ValueChanged="@(value => _plz = value)"
                                    Error="@GetValidationError(nameof(_plz))" />
                 </KernCol>
-                <KernCol Span="4">
+                <KernCol Span="12" SpanMd="4">
                     <KernInputText Label="Ort"
                                    Value="@_ort"
                                    ValueChanged="@(value => _ort = value)"
@@ -112,17 +112,17 @@
                                    ValueChanged="@(value => _postStrasse = value)" />
 
                     <KernRow>
-                        <KernCol Span="4">
+                        <KernCol Span="12" SpanMd="4">
                             <KernInputText Label="Hausnummer"
                                            Value="@_postHausnummer"
                                            ValueChanged="@(value => _postHausnummer = value)" />
                         </KernCol>
-                        <KernCol Span="4">
+                        <KernCol Span="12" SpanMd="4">
                             <KernInputText Label="PLZ"
                                            Value="@_postPlz"
                                            ValueChanged="@(value => _postPlz = value)" />
                         </KernCol>
-                        <KernCol Span="4">
+                        <KernCol Span="12" SpanMd="4">
                             <KernInputText Label="Ort"
                                            Value="@_postOrt"
                                            ValueChanged="@(value => _postOrt = value)" />
@@ -132,10 +132,10 @@
             }
 
             <KernRow>
-                <KernCol Span="6">
+                <KernCol Span="12" SpanMd="6">
                     <KernButton Variant="ButtonVariant.Secondary" OnClick="PreviousStep" Block="true">Zurück</KernButton>
                 </KernCol>
-                <KernCol Span="6">
+                <KernCol Span="12" SpanMd="6">
                     <KernButton Variant="ButtonVariant.Primary" OnClick="NextStep" Block="true">Weiter</KernButton>
                 </KernCol>
             </KernRow>
@@ -183,10 +183,10 @@
                           Error="@GetValidationError(nameof(_bestaetigt))" />
 
             <KernRow>
-                <KernCol Span="6">
+                <KernCol Span="12" SpanMd="6">
                     <KernButton Variant="ButtonVariant.Secondary" OnClick="PreviousStep" Block="true">Zurück</KernButton>
                 </KernCol>
-                <KernCol Span="6">
+                <KernCol Span="12" SpanMd="6">
                     <KernButton Variant="ButtonVariant.Primary" OnClick="SubmitAntrag" Block="true" Disabled="@(!_bestaetigt)">Antrag absenden</KernButton>
                 </KernCol>
             </KernRow>

@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="KernUx.Blazor.Demo.SmokeTests/KernUx.Blazor.Demo.SmokeTests.csproj" />
   <Project Path="KernUx.Blazor.Demo/KernUx.Blazor.Demo.csproj" />
   <Project Path="KernUx.Blazor.Tests/KernUx.Blazor.Tests.csproj" />
   <Project Path="KernUx.Blazor/KernUx.Blazor.csproj" />
