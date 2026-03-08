@@ -167,6 +167,57 @@ Barrierefreiheit ist ein **Kernprinzip** von KERN-UX:
 - **Variablen**: Nutze KERN-Token (`var(--kern-color-*)`)
 - **Keine eigenen Präfixe**: Halte dich an `kern-` Namensraum
 
+### Umlaute und Sonderzeichen
+
+**Grundregel**: Deutsche Umlaute (ä, ö, ü, ß) und Sonderzeichen immer korrekt verwenden – **nie** durch "ae", "oe", "ue", "ss" ersetzen.
+
+#### Benutzersichtbare Texte
+
+Alle Inhalte, die dem Nutzer präsentiert werden, **müssen** korrekte Umlaute verwenden:
+
+```razor
+✅ Gut: Korrekte Umlaute
+<KernBody>Bitte prüfen Sie die fehlenden Pflichtfelder.</KernBody>
+<KernButton>Zurück</KernButton>
+<KernAlert Title="Änderungen gespeichert">Die Daten wurden erfolgreich übermittelt.</KernAlert>
+
+❌ Schlecht: Ersatz durch "ae/oe/ue"
+<KernBody>Bitte pruefen Sie die fehlenden Pflichtfelder.</KernBody>
+<KernButton>Zurueck</KernButton>
+<KernAlert Title="Aenderungen gespeichert">Die Daten wurden erfolgreich uebermittelt.</KernAlert>
+```
+
+**Betrifft:**
+- Alle Texte in Razor-Markup (`<KernBody>`, `<KernAlert>`, `<KernButton>`, etc.)
+- String-Literale in `@code`-Blöcken, die als UI-Text verwendet werden
+- `PageTitle`, `Description`, Label-Texte
+- Fehlermeldungen, Hinweistexte, Tooltips
+- Dokumentationskommentare in XML-Doku (`<summary>`, `<param>`)
+
+#### Technische Bezeichner (Code)
+
+In Code-Bezeichnern sind Ersatz-Schreibweisen **erlaubt** (aber nicht zwingend):
+
+```csharp
+✅ Erlaubt: Ersatz in Bezeichnern
+private string? _emailAdresse;
+private bool _datenschutzAkzeptiert;
+public string Rueckmeldung { get; set; }
+
+✅ Auch erlaubt: Umlaute in Bezeichnern
+private string? _emailAdresse;
+private bool _datenschutzAkzeptiert;
+public string Rückmeldung { get; set; }
+```
+
+**Betrifft:**
+- Variablennamen, Methodennamen, Klassennamen
+- Enum-Werte
+- Property- und Parameter-Namen
+- Private Felder
+
+**Ausnahme**: Auch in Bezeichnern sollte man Umlaute verwenden, wenn sie die Lesbarkeit deutlich erhöhen und keine technischen Probleme verursachen.
+
 ## Unit-Tests
 
 ### Struktur: Given / When / Then
@@ -605,6 +656,4 @@ window.kernDialog = {
 - KERN-UX Website: https://www.kern-ux.de
 - Komponenten-Dokumentation: https://www.kern-ux.de/komponenten
 - GitLab Repository: https://gitlab.opencode.de/kern-ux/kern-ux-plain
-
-
 
