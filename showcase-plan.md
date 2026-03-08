@@ -657,6 +657,50 @@ Komponente für nebeneinander dargestellte Varianten (z.B. 3 Button-Varianten in
 
 → **Ergebnis:** Abgerundete, produktionsnahe Showcase-App
 
+#### 23.1 Smoke-Test-Plan (manuell)
+
+**Ziel:** Schnelle Absicherung, dass Navigation, Theme, Responsiveness und Kern-Interaktionen in der Demo stabil funktionieren.
+
+**Testumfang (kritische Routen):**
+- `/`
+- `/components/typography`, `/components/layout`, `/components/buttons`, `/components/forms`
+- `/components/feedback`, `/components/content`, `/components/navigation`, `/components/icons`
+- `/examples/antrag`, `/examples/dashboard`
+- `/not-found`
+
+**Checkliste je Seite:**
+1. Seite lädt ohne Fehler-Overlay (`#blazor-error-ui` bleibt verborgen)
+2. `PageTitle` passt zur Route
+3. KERN-Layout sichtbar (`KernKopfzeile`, Navigation, Main-Bereich)
+4. Keine offensichtlichen Layout-Brüche bei Responsive-Breakpoints
+5. Interaktive Elemente reagieren erwartungsgemäß (Buttons, Dialog, Toggle, Formulare)
+
+**Zusätzliche Querschnittsprüfungen:**
+- Theme-Toggle (Light ↔ Dark) in mindestens 3 Seiten prüfen
+- Dialog öffnen/schließen auf `/components/content`
+- Multi-Step-Fluss auf `/examples/antrag` einmal vollständig durchlaufen
+- Progress/Status-Interaktion auf `/examples/dashboard` prüfen
+
+#### 23.2 Optionale Automatisierung mit Playwright (.NET / C#)
+
+**Empfehlung:** Smoke-Suite mit `Microsoft.Playwright` als separates Testprojekt, z.B. `KernUx.Blazor.Demo.SmokeTests`.
+
+**Vorgeschlagene Struktur:**
+- `Smoke/NavigationSmokeTests.cs`: Route-Liste aufrufbar, Titel/Grundlayout prüfen
+- `Smoke/ThemeSmokeTests.cs`: Theme-Toggle und Persistenz (`kern-theme` Cookie) prüfen
+- `Smoke/InteractiveSmokeTests.cs`: Dialog, Formular-Wizard/Antrag, Dashboard-Interaktionen
+- `Smoke/ResponsiveSmokeTests.cs`: Desktop/Tablet/Mobil Viewports mit Screenshot-Baseline
+
+**Minimaler CI-Ablauf (optional):**
+1. Demo-App starten (Testserver oder `dotnet run`)
+2. Playwright-Suite gegen lokale URL ausführen
+3. Bei Fehlern: Trace + Screenshot als Build-Artefakte speichern
+
+**Nutzen:**
+- Wiederholbare Regression-Absicherung bei UI-Änderungen
+- Schnellere Rückmeldung bei defekten Routen/Interaktionen
+- Gut kombinierbar mit manuellem Explorations-Test
+
 ### Phase E (optional) – Erweiterte Praxisbeispiele
 
 24. **`FormWizardExample.razor`**: Formular-Wizard mit Schritt-Navigation, Fortschrittsanzeige und Zwischenspeicherung
