@@ -31,6 +31,12 @@ playwright/.auth/
 /test-results/
 
 # ──────────────────────────────────────────────────────────────────────────────
+# SASS-Compiler-Output (wwwroot/css wird aus Styles/ generiert, nicht committen)
+# ──────────────────────────────────────────────────────────────────────────────
+src/KernUx.Blazor/wwwroot/css/
+KernUxExample.Blazor/wwwroot/css/
+
+# ──────────────────────────────────────────────────────────────────────────────
 # Projektspezifische Skript-Ausgaben (scripts/Run-SmokeTests.ps1)
 # ──────────────────────────────────────────────────────────────────────────────
 build-output.txt
