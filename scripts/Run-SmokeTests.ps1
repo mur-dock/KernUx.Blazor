@@ -18,9 +18,9 @@ param(
 $ErrorActionPreference = "Stop"
 
 # ── Pfade ─────────────────────────────────────────────────────────────────────
-$SolutionRoot = Resolve-Path (Join-Path $PSScriptRoot ".")
-$DemoProject  = Join-Path $SolutionRoot "KernUx.Blazor.Demo\KernUx.Blazor.Demo.csproj"
-$TestProject  = Join-Path $SolutionRoot "KernUx.Blazor.Demo.SmokeTests\KernUx.Blazor.Demo.SmokeTests.csproj"
+$SolutionRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
+$DemoProject  = Join-Path $SolutionRoot "src\KernUx.Blazor.Demo\KernUx.Blazor.Demo.csproj"
+$TestProject  = Join-Path $SolutionRoot "tests\KernUx.Blazor.Demo.SmokeTests\KernUx.Blazor.Demo.SmokeTests.csproj"
 $ResultsDir   = Join-Path $SolutionRoot "test-results"
 $ResultsFile  = Join-Path $SolutionRoot "smoke-test-results.txt"
 # HTTPS-URL für Playwright-Tests (Chromium vertraut dem Dev-Zertifikat automatisch)
@@ -46,7 +46,7 @@ try {
 
     # ── Schritt 2: Solution bauen ─────────────────────────────────────────────
     Write-Step "Solution wird gebaut ($Configuration)..."
-    dotnet build "$SolutionRoot\KernUxExample.slnx" `
+    dotnet build "$SolutionRoot\KernUx.Blazor.slnx" `
         --configuration $Configuration `
         --nologo -q 2>&1 | Out-File -FilePath (Join-Path $SolutionRoot "build-output.txt") -Encoding utf8
     if ($LASTEXITCODE -ne 0) {
@@ -58,7 +58,7 @@ try {
     # ── Schritt 3: Playwright-Browser installieren ────────────────────────────
     Write-Step "Playwright-Browser prüfen / installieren..."
     $PlaywrightScript = Join-Path $SolutionRoot `
-        "KernUx.Blazor.Demo.SmokeTests\bin\$Configuration\net10.0\playwright.ps1"
+        "tests\KernUx.Blazor.Demo.SmokeTests\bin\$Configuration\net10.0\playwright.ps1"
 
     if (Test-Path $PlaywrightScript) {
         # Playwright gibt über Node.js Deprecation-Warnungen auf stderr aus

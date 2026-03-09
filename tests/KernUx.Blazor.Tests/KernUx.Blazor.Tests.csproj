@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KernUx.Blazor\KernUx.Blazor.csproj" />
+    <ProjectReference Include="..\..\src\KernUx.Blazor\KernUx.Blazor.csproj" />
   </ItemGroup>
 
 </Project>

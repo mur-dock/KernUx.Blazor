@@ -18,10 +18,10 @@
       Dann dieses Skript mit -Migrate ausführen (ohne Rollback).
 
 .PARAMETER ScssRoot
-    Pfad zum Ordner mit den SCSS-Dateien. Standard: ".\KernUxExample.Blazor\Styles"
+    Pfad zum Ordner mit den SCSS-Dateien. Standard: "..\KernUxExample.Blazor\Styles"
 
 .PARAMETER SassCompilerJson
-    Pfad zur sasscompiler.json. Standard: ".\KernUxExample.Blazor\sasscompiler.json"
+    Pfad zur sasscompiler.json. Standard: "..\KernUxExample.Blazor\sasscompiler.json"
 
 .PARAMETER DryRun
     Zeigt Änderungen nur an, speichert aber nichts.
@@ -31,14 +31,14 @@
     die neue Syntax bereits unterstützt).
 
 .EXAMPLE
-    .\Fix-SassIfDeprecation.ps1 -DryRun
-    .\Fix-SassIfDeprecation.ps1
-    .\Fix-SassIfDeprecation.ps1 -Migrate -DryRun
+    .\scripts\Fix-SassIfDeprecation.ps1 -DryRun
+    .\scripts\Fix-SassIfDeprecation.ps1
+    .\scripts\Fix-SassIfDeprecation.ps1 -Migrate -DryRun
 #>
 
 param(
-    [string]$ScssRoot          = ".\KernUxExample.Blazor\Styles",
-    [string]$SassCompilerJson  = ".\KernUxExample.Blazor\sasscompiler.json",
+    [string]$ScssRoot          = "..\KernUxExample.Blazor\Styles",
+    [string]$SassCompilerJson  = "..\KernUxExample.Blazor\sasscompiler.json",
     [switch]$DryRun,
     [switch]$Migrate
 )
