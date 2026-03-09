@@ -408,15 +408,15 @@ Die folgende Checkliste beschreibt die empfohlene Reihenfolge der Umsetzung:
 
 ### Phase 2 – Verzeichnisstruktur
 
-- [ ] Verzeichnisse `src/`, `tests/`, `docs/`, `docs/internal/`, `scripts/` anlegen
-- [ ] Projekte verschieben: `KernUx.Blazor/` → `src/KernUx.Blazor/`
-- [ ] Projekte verschieben: `KernUx.Blazor.Demo/` → `src/KernUx.Blazor.Demo/`
-- [ ] Projekte verschieben: `KernUx.Blazor.Tests/` → `tests/KernUx.Blazor.Tests/`
-- [ ] Projekte verschieben: `KernUx.Blazor.Demo.SmokeTests/` → `tests/KernUx.Blazor.Demo.SmokeTests/`
-- [ ] `KernUx.Blazor.slnx` – alle Projekt-Pfade aktualisieren
-- [ ] `.csproj`-Referenzen (z.B. `../README.md`) auf neue Pfade anpassen
-- [ ] Interne Planungsdateien nach `docs/internal/` verschieben
-- [ ] Skripte nach `scripts/` verschieben
+- [x] Verzeichnisse `src/`, `tests/`, `docs/`, `docs/internal/`, `scripts/` anlegen
+- [x] Projekte verschieben: `KernUx.Blazor/` → `src/KernUx.Blazor/`
+- [x] Projekte verschieben: `KernUx.Blazor.Demo/` → `src/KernUx.Blazor.Demo/`
+- [x] Projekte verschieben: `KernUx.Blazor.Tests/` → `tests/KernUx.Blazor.Tests/`
+- [x] Projekte verschieben: `KernUx.Blazor.Demo.SmokeTests/` → `tests/KernUx.Blazor.Demo.SmokeTests/`
+- [x] `KernUx.Blazor.slnx` – alle Projekt-Pfade aktualisieren
+- [x] `.csproj`-Referenzen (z.B. `../README.md`) auf neue Pfade anpassen
+- [x] Interne Planungsdateien nach `docs/internal/` verschieben
+- [x] Skripte nach `scripts/` verschieben
 
 ### Phase 3 – GitHub-Workflows und Vorlagen
 
