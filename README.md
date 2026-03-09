@@ -3,7 +3,8 @@
 **KERN-UX Design System** als Blazor Component Library –
 typsichere, barrierefreie Komponenten für die deutsche Verwaltung (WCAG 2.1 AA).
 
-[![NuGet](https://img.shields.io/badge/NuGet-0.1.0-blue)](https://www.nuget.org/packages/KernUx.Blazor)
+[![CI](https://github.com/mur-dock/KernUx.Blazor/actions/workflows/ci.yml/badge.svg)](https://github.com/OWNER/KernUx.Blazor/actions/workflows/ci.yml)
+[![NuGet](https://img.shields.io/nuget/v/KernUx.Blazor)](https://www.nuget.org/packages/KernUx.Blazor)
 [![KERN-UX](https://img.shields.io/badge/KERN--UX-Design%20System-green)](https://www.kern-ux.de)
 [![Lizenz: MIT](https://img.shields.io/badge/Lizenz-MIT-yellow)](LICENSE)
 
@@ -22,6 +23,8 @@ typsichere, barrierefreie Komponenten für die deutsche Verwaltung (WCAG 2.1 AA)
 - [Erweiterungen gegenüber KERN-UX](#erweiterungen-gegenüber-kern-ux)
 - [Projektstruktur](#projektstruktur)
 - [Entwicklung & Tests](#entwicklung--tests)
+- [Beitragen](#beitragen)
+- [Changelog](#changelog)
 - [Lizenz](#lizenz)
 
 ---
@@ -253,33 +256,47 @@ Folgende Komponenten sind **Blazor-Library-Erweiterungen** und nicht Teil des of
 | `KernInputCurrency` | Währungseingabe optimiert für DACH (de-DE/de-CH), mit `decimal?`-Binding |
 
 Die zugehörigen SCSS-Erweiterungen liegen in `Styles/extensions/` und werden bei KERN-UX-Updates
-**nicht** überschrieben. Siehe [`Styles/extensions/README.md`](KernUx.Blazor/Styles/extensions/README.md).
+**nicht** überschrieben. Siehe [`Styles/extensions/README.md`](src/KernUx.Blazor/Styles/extensions/README.md).
 
 ---
 
 ## Projektstruktur
 
 ```
-KernUx.Blazor/
-├── Components/
-│   ├── Content/          # Accordion, Card, Dialog, Table, Summary, TaskList
-│   ├── Feedback/         # Alert, Badge, Loader, Progress
-│   ├── Forms/            # Button, alle Input-Typen, Select, Checkbox, Radio, Fieldset
-│   ├── Layout/           # Container, Row, Col, ThemeProvider
-│   ├── Navigation/       # Kopfzeile, Link, List
-│   ├── Shared/           # Icon, Divider, KernStyles
-│   └── Typography/       # Heading, Title, Body, Label, Subline, Preline
-├── Enums/                # Typsichere Enums für alle Parameter
-├── Extensions/           # AddKernUx() DI-Erweiterung
-├── Services/             # ThemeService, IdGeneratorService
-├── Styles/
-│   ├── core/             # KERN-UX SCSS (nicht bearbeiten – wird bei Updates überschrieben)
-│   ├── extensions/       # Projekt-spezifische SCSS-Ergänzungen (update-sicher)
-│   └── themes/kern/      # KERN-Theme Entry Point
-├── Utilities/            # CssBuilder, EnumCssExtensions
-└── wwwroot/
-    ├── css/              # Kompilierte CSS-Dateien
-    └── js/               # kern-dialog.js
+KernUx.Blazor/                              ← Repository-Root
+├── src/
+│   ├── KernUx.Blazor/                      ← Razor Class Library (NuGet-Paket)
+│   │   ├── Components/
+│   │   │   ├── Content/                    # Accordion, Card, Dialog, Table, Summary, TaskList
+│   │   │   ├── Feedback/                   # Alert, Badge, Loader, Progress
+│   │   │   ├── Forms/                      # Button, alle Input-Typen, Select, Checkbox, Radio, Fieldset
+│   │   │   ├── Layout/                     # Container, Row, Col, ThemeProvider
+│   │   │   ├── Navigation/                 # Kopfzeile, Link, List
+│   │   │   ├── Shared/                     # Icon, Divider, KernStyles
+│   │   │   └── Typography/                 # Heading, Title, Body, Label, Subline, Preline
+│   │   ├── Enums/                          # Typsichere Enums für alle Parameter
+│   │   ├── Extensions/                     # AddKernUx() DI-Erweiterung
+│   │   ├── Services/                       # ThemeService, IdGeneratorService
+│   │   ├── Styles/
+│   │   │   ├── core/                       # KERN-UX SCSS (nicht bearbeiten – wird bei Updates überschrieben)
+│   │   │   ├── extensions/                 # Projekt-spezifische SCSS-Ergänzungen (update-sicher)
+│   │   │   └── themes/kern/                # KERN-Theme Entry Point
+│   │   ├── Utilities/                      # CssBuilder, EnumCssExtensions
+│   │   └── wwwroot/
+│   │       ├── css/                        # Kompilierte CSS-Dateien
+│   │       └── js/                         # kern-dialog.js
+│   └── KernUx.Blazor.Demo/                 ← Interaktive Showcase-App
+├── tests/
+│   ├── KernUx.Blazor.Tests/                ← bUnit-Unit-Tests (Rendering, Interaktion, Accessibility)
+│   └── KernUx.Blazor.Demo.SmokeTests/      ← Playwright-Smoke-Tests
+├── docs/
+│   ├── contributing/                       # Entwickler-Dokumentation
+│   └── internal/                           # Interne Planungsdokumente
+├── scripts/                                # PowerShell-Hilfsskripte
+└── .github/
+    ├── workflows/                          # CI- und Release-Workflows
+    ├── ISSUE_TEMPLATE/                     # Strukturierte Issue-Formulare
+    └── PULL_REQUEST_TEMPLATE.md
 ```
 
 ---
@@ -289,7 +306,7 @@ KernUx.Blazor/
 ### Tests ausführen
 
 ```bash
-dotnet test KernUx.Blazor.Tests/KernUx.Blazor.Tests.csproj
+dotnet test tests/KernUx.Blazor.Tests/KernUx.Blazor.Tests.csproj
 ```
 
 Das Testprojekt enthält:
@@ -301,7 +318,7 @@ Das Testprojekt enthält:
 ### NuGet-Paket erstellen
 
 ```bash
-dotnet pack KernUx.Blazor/KernUx.Blazor.csproj --configuration Release
+dotnet pack src/KernUx.Blazor/KernUx.Blazor.csproj --configuration Release
 ```
 
 ### SCSS-Kompilierung
@@ -313,6 +330,24 @@ SCSS wird beim Build automatisch via `AspNetCore.SassCompiler` nach `wwwroot/css
 Neue Stile gehören nach `Styles/extensions/components/` und müssen in
 `Styles/extensions/index.scss` per `@use` registriert werden.
 Niemals `Styles/core/` direkt bearbeiten.
+
+Ausführliche Anleitung: [`docs/contributing/development-setup.md`](docs/contributing/development-setup.md)
+
+---
+
+## Beitragen
+
+Contributions sind willkommen! Bitte lies zuerst [CONTRIBUTING.md](CONTRIBUTING.md).
+
+- 🐛 **Bug melden**: [Bug-Report-Vorlage](.github/ISSUE_TEMPLATE/bug_report.yml)
+- ✨ **Feature vorschlagen**: [Feature-Request-Vorlage](.github/ISSUE_TEMPLATE/feature_request.yml)
+- 🛡️ **Sicherheitslücke melden**: Bitte vertraulich über [SECURITY.md](SECURITY.md)
+
+---
+
+## Changelog
+
+Alle Änderungen sind in [CHANGELOG.md](CHANGELOG.md) dokumentiert.
 
 ---
 
