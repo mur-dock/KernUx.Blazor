@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <base href="/"/>
     <title>KernUxExample.Blazor</title>
+    @* Anti-FOUC: Theme sofort vor dem ersten Paint setzen. *@
+    @* Liest das Cookie "kern-theme"; fällt auf prefers-color-scheme zurück. *@
+    @* Dies ist das einzige verbleibende JavaScript – es ist technisch unvermeidbar. *@
+    <script>
+        (() => {
+            const m = document.cookie.match(/(?:^|;\s*)kern-theme=(light|dark)/);
+            const t = m ? m[1] : (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+            document.documentElement.setAttribute("data-kern-theme", t);
+        })();
+    </script>
     <ResourcePreloader/>
     <link rel="stylesheet" href="@Assets["css/themes/kern/index.css"]"/>
     <link rel="stylesheet" href="@Assets["app.css"]"/>

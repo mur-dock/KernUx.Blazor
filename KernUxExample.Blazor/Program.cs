@@ -1,10 +1,14 @@
 using KernUxExample.Blazor.Components;
+using KernUxExample.Blazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+// ThemeService als Scoped registrieren (eine Instanz pro Blazor-Circuit / Browser-Tab).
+builder.Services.AddScoped<ThemeService>();
 
 var app = builder.Build();
 
