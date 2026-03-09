@@ -17,22 +17,9 @@
 
             <KernRow>
                 <KernCol Span="6" SpanMd="4">
-                    <KernButton Variant="ButtonVariant.Primary" Type="button" OnClick="GoHome" Block="true">
-                        Zur Startseite
-                    </KernButton>
+                    <a href="/" class="kern-btn kern-btn--primary kern-btn--block">Zur Startseite</a>
                 </KernCol>
             </KernRow>
         </KernCol>
     </KernRow>
 </KernContainer>
-
-@code {
-    [Inject]
-    private NavigationManager NavigationManager { get; set; } = default!;
-
-    private Task GoHome(MouseEventArgs _)
-    {
-        NavigationManager.NavigateTo("/");
-        return Task.CompletedTask;
-    }
-}
