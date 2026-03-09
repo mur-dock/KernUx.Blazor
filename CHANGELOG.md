@@ -1,0 +1,56 @@
+# Changelog
+
+Alle bemerkenswerten Änderungen an diesem Projekt werden in dieser Datei dokumentiert.
+
+Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
+und dieses Projekt hält sich an [Semantic Versioning](https://semver.org/lang/de/).
+
+## [Unreleased]
+
+## [0.1.0] – 2026-03-09
+
+### Hinzugefügt
+
+#### Komponenten-Library (`KernUx.Blazor`)
+
+- **Layout**: `KernContainer`, `KernRow`, `KernCol`, `KernThemeProvider`
+- **Typografie**: `KernHeading`, `KernTitle`, `KernBody`, `KernLabel`, `KernSubline`, `KernPreline`
+- **Navigation**: `KernKopfzeile`, `KernLink`, `KernList`
+- **Shared**: `KernIcon`, `KernDivider`, `KernStyles`
+- **Formular-Elemente**: `KernButton`, `KernInputText`, `KernInputEmail`, `KernInputPassword`,
+  `KernInputTel`, `KernInputUrl`, `KernInputNumber`, `KernInputDate`, `KernInputFile`,
+  `KernTextarea`, `KernSelect`, `KernCheckbox`, `KernCheckboxList`, `KernRadioGroup`, `KernFieldset`
+- **Feedback**: `KernAlert`, `KernBadge`, `KernLoader`, `KernProgress`
+- **Content**: `KernAccordion`, `KernAccordionGroup`, `KernCard`, `KernCardMedia`,
+  `KernCardContainer`, `KernDialog`, `KernTable`, `KernDescriptionList`, `KernDescriptionItem`,
+  `KernSummary`, `KernSummaryGroup`, `KernTaskList`, `KernTaskListItem`, `KernTaskListGroup`
+
+#### Library-Erweiterungen (über KERN-UX-Standard hinaus)
+
+- **`KernInputCurrency`** – Währungseingabe optimiert für DACH (de-DE/de-CH) mit `decimal?`-Binding;
+  SCSS-Erweiterung in `Styles/extensions/` (update-sicher gegenüber KERN-UX-Core)
+
+#### Services & Infrastruktur
+
+- **`ThemeService`** – Light-/Dark-Theme-Verwaltung, Cookie-Persistenz (`kern-theme`),
+  Anti-FOUC-Script
+- **`IdGeneratorService`** – kollisionsfreie DOM-IDs pro Komponenten-Instanz für
+  ARIA-Referenzattribute (`aria-describedby`, `aria-labelledby`)
+- **`AddKernUx()`** – DI-Erweiterungsmethode registriert alle Services in einem Aufruf
+- **Typsichere Enums** für alle Komponenten-Parameter (`ButtonVariant`, `AlertType`,
+  `KernIconGlyph`, `HeadingLevel`, `Size`, u. v. m.)
+- **KERN-UX-CSS** als statische Assets unter `_content/KernUx.Blazor/css/`
+- **`kern-dialog.js`** als statisches Asset unter `_content/KernUx.Blazor/js/`
+- **WCAG 2.1 AA** – ARIA-Attribute, semantisches HTML, Fokus-Management, Kontrast
+
+#### Demo-App & Tests
+
+- **`KernUx.Blazor.Demo`** – interaktive Showcase-App mit Beispielen für alle Komponenten,
+  Antragsstrecke und Theme-Toggle
+- **`KernUx.Blazor.Tests`** – bUnit-Testprojekt mit Rendering-, Interaktions- und
+  Accessibility-Audit-Tests für alle Komponenten
+- **`KernUx.Blazor.Demo.SmokeTests`** – Playwright/NUnit-Smoke-Tests für die Demo-App
+
+[Unreleased]: https://github.com/OWNER/KernUx.Blazor/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/OWNER/KernUx.Blazor/releases/tag/v0.1.0
+

@@ -430,10 +430,10 @@ Die folgende Checkliste beschreibt die empfohlene Reihenfolge der Umsetzung:
 
 ### Phase 4 – Dokumentation vervollständigen
 
-- [ ] `CHANGELOG.md` mit Version 0.1.0 befüllen
-- [ ] `docs/contributing/development-setup.md` erstellen
-- [ ] `README.md` – Badges und Abschnitt „Beitragen" ergänzen
-- [ ] `README.md` – Projektstruktur-Abschnitt auf neue Pfade aktualisieren
+- [x] `CHANGELOG.md` mit Version 0.1.0 befüllen
+- [x] `docs/contributing/development-setup.md` erstellen
+- [x] `README.md` – Badges und Abschnitt „Beitragen" ergänzen
+- [x] `README.md` – Projektstruktur-Abschnitt auf neue Pfade aktualisieren
 
 ### Phase 5 – Repository-Einstellungen (auf GitHub)
 
