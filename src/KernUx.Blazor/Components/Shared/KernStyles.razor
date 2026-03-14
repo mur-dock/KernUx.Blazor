@@ -1,10 +1,13 @@
 ﻿@namespace KernUx.Blazor.Components.Shared
 
 <HeadContent>
-    <link rel="stylesheet" href="@ThemeStylesheetPath" />
+    <link rel="stylesheet" href="@Assets["_content/KernUx.Blazor/assets/fira-sans-v17-latin/style.css"]" />
+    <link rel="stylesheet" href="@Assets["_content/KernUx.Blazor/assets/material-symbols-subset/style.css"]" />
+    <link rel="stylesheet" href="@Assets["_content/KernUx.Blazor/assets/codicons/codicon.css"]" />
+    @* <link rel="stylesheet" href="@ThemeStylesheetPath" /> *@
     @if (IncludeExtensions)
     {
-        <link rel="stylesheet" href="@ExtensionsStylesheetPath" />
+        @* <link rel="stylesheet" href="@ExtensionsStylesheetPath" /> *@
     }
 </HeadContent>
 
