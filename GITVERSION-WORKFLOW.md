@@ -67,6 +67,27 @@ Hinweis: Die genauen Zähler (`alpha.1`, `beta.1`, ...) hängen von Commit-Anzah
 Wichtig: Für das erzwungene Minor-Upgrade bei `feature/*`-Übernahmen muss der Merge als
 Merge-Commit in `main` landen (kein Squash/Fast-Forward).
 
+## Release-How-To über GitHub (allgemeiner Ablauf)
+
+Dieser Ablauf beschreibt den typischen Weg für ein offizielles Release über GitHub.
+
+1. Änderungen über Pull Request nach `main` mergen (bevorzugt als Merge-Commit).
+2. Warten, bis die CI auf `main` erfolgreich ist (Build/Test/Pack).
+3. Gewünschte Release-Version festlegen (z. B. `v0.2.0` bei Feature-Release oder `v0.1.1` bei Bugfix-Release).
+4. Auf GitHub unter **Releases** ein neues Release erstellen:
+   - **Tag**: `vX.Y.Z` (neu erstellen, auf den aktuellen `main`-Commit zeigen lassen)
+   - **Target**: `main`
+   - **Release title**: z. B. `v0.2.0`
+   - **Description**: Kurzbeschreibung/Changelog der Änderungen
+5. Release veröffentlichen.
+6. Tag- bzw. Release-Workflow in GitHub Actions abwarten.
+7. Ergebnis prüfen:
+   - erzeugte Paketversion entspricht `X.Y.Z`
+   - Artefakte/NuGet-Paket wurden erfolgreich veröffentlicht
+
+Hinweis: Das Tag ist der maßgebliche Punkt für die finale Release-Version. Ohne Tag baut
+`main` weiterhin fortlaufende Versionen nach GitVersion-Regeln.
+
 ## Wichtige Hinweise für CI
 
 - Der Checkout muss Tags und ausreichend Historie enthalten (`fetch-depth: 0` in GitHub Actions).
