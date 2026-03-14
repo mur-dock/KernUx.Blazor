@@ -1,0 +1,19 @@
+{
+  "name": "npmjs",
+  "private": true,
+  "dependencies": {
+    "@kern-ux-public-ui/theme-kolibri": "^2.4.1",
+    "@public-ui/components": "^3.0.8"
+  },
+  "scripts": {
+    "build": "webpack",
+    "postinstall": "npm run postinstall:components-assets && npm run postinstall:themes-assets",
+    "postinstall:components-assets": "cpy \"node_modules/@public-ui/components/assets/**/*\" ../wwwroot/assets --dot",
+    "postinstall:themes-assets": "cpy \"node_modules/@kern-ux-public-ui/theme-kolibri/assets/**/*\" ../wwwroot/assets --dot"
+  },
+  "devDependencies": {
+    "cpy-cli": "^7.0.0",
+    "webpack": "^5.105.4",
+    "webpack-cli": "^7.0.0"
+  }
+}
