@@ -68,3 +68,10 @@ riderModule.iml
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# NPM
+NpmJS/node_modules
+
+# Generated
+wwwroot/assets
+wwwroot/js/*index.bundle.js*
