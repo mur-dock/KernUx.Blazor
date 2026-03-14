@@ -130,6 +130,7 @@
     .kern-col-#{$i} {
       flex: 0 0 auto;
       width: (math.div(100%, $grid-columns) * $i);
+      max-width: (math.div(100%, $grid-columns) * $i);
     }
     .kern-col-offset-#{$i} {
       margin-left: (math.div(100%, $grid-columns) * $i);
@@ -151,7 +152,9 @@
 
         @for $i from 1 through $grid-columns {
           .kern-col-#{$name}-#{$i} {
+            flex: 0 0 auto;
             width: (math.div(100%, $grid-columns) * $i);
+            max-width: (math.div(100%, $grid-columns) * $i);
           }
           .kern-col-#{$name}-offset-#{$i} {
             margin-left: (math.div(100%, $grid-columns) * $i);
